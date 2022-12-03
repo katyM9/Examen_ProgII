@@ -5,13 +5,14 @@
 package Editor_texto;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedWriter; 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.net.URISyntaxException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -46,6 +47,9 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Nuevo = new javax.swing.JButton();
         Abrir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        miURL = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Guardar = new javax.swing.JButton();
         txtNombreNewAchivo = new javax.swing.JTextField();
@@ -70,21 +74,49 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Abrir desde la Web");
+
+        jButton1.setText("Ir a la URL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Nuevo)
-            .addComponent(Abrir)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Abrir)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Nuevo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(miURL, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton1)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(Abrir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(Nuevo)
-                .addGap(57, 57, 57))
+                .addGap(100, 100, 100)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(miURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Nombre nuevo Archivo:");
@@ -106,25 +138,23 @@ public class interfaz extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombreNewAchivo)
+                        .addComponent(txtNombreNewAchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Guardar)
-                        .addGap(79, 79, 79))
+                        .addComponent(Guardar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtNombreNewAchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombreNewAchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Guardar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,7 +204,7 @@ public class interfaz extends javax.swing.JFrame {
              
         }catch(IOException ex){
             
-            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE,null,ex);
+//            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE,null,ex);
         }
         
         try{
@@ -189,6 +219,25 @@ public class interfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");        
         
     }//GEN-LAST:event_GuardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         if(java.awt.Desktop.isDesktopSupported()){
+             
+           java.awt.Desktop desktop= java.awt.Desktop.getDesktop();
+           
+           if(desktop.isSupported(java.awt.Desktop.Action.BROWSE)){
+               try{
+                   java.net.URI uri= new java.net.URI(miURL.getText());
+                   desktop.browse(uri);
+               }catch(URISyntaxException e){
+                   
+               } catch (IOException ex) {
+                   java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+               }
+           }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,11 +278,14 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JButton Abrir;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Nuevo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFileChooser katyfile;
+    private javax.swing.JTextField miURL;
     private javax.swing.JTextArea txtArea;
     private javax.swing.JTextField txtNombreNewAchivo;
     // End of variables declaration//GEN-END:variables
